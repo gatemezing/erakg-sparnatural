@@ -1,0 +1,494 @@
+@prefix : <http://ontologies.sparna.fr/sparnatural-demo-dbpedia#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://ontologies.sparna.fr/sparnatural-demo-dbpedia#> .
+
+<http://data.era.europa.eu/949/graph/demo> rdf:type owl:Ontology ;
+                                            owl:imports <http://data.sparna.fr/ontologies/sparnatural-config-core> ,
+                                                        <http://data.sparna.fr/ontologies/sparnatural-config-datasources> ;
+                                            rdfs:comment "ERA KG configuration for SPARNATURAL"@en ;
+                                            owl:versionInfo "v1.0" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://data.era.europa.eu/949/graph/demo#containTrack
+:containTrack rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#AutocompleteProperty> ;
+              rdfs:domain :Tunnel ;
+              rdfs:range :Track ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "^<http://data.europa.eu/949/passesThroughTunnel>" ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "Tunnel containing track"@en ;
+              rdfs:label "contains track"@en .
+
+
+###  http://data.era.europa.eu/949/graph/demo#gaugingProfile
+:gaugingProfile rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#TreeProperty> ;
+                <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/gaugingProfile>" ;
+                <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "gauging profile of a Track"@en ;
+                <http://data.sparna.fr/ontologies/sparnatural-config-datasources#treeRootsDatasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#list_skospreflabel_alpha_with_count> ;
+                rdfs:label "gauging profile"@en .
+
+
+###  http://data.era.europa.eu/949/graph/demo#hasEmergencyPlan
+:hasEmergencyPlan rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#BooleanProperty> ;
+                  rdfs:domain :Tunnel ;
+                  rdfs:range :Text ;
+                  <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/hasEmergencyPlan>" ;
+                  <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "Know if a tunnel has emergency plan"@en ;
+                  rdfs:label "has emergency plan"@en .
+
+
+###  http://data.era.europa.eu/949/graph/demo#isQuietRoute
+:isQuietRoute rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#BooleanProperty> ;
+              rdfs:domain :Track ;
+              rdfs:range :Text ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/isQuietRoute>" ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "belonging to a quieter route or not"@en ;
+              rdfs:label "belonging to a quieter route"@en .
+
+
+###  http://data.era.europa.eu/949/graph/demo#length
+:length rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#AutocompleteProperty> ;
+        rdfs:domain :Tunnel ;
+        rdfs:range :Text ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#isMultilingual> "false"^^xsd:boolean ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/length>" ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "length of a tunnel"@en ;
+        rdfs:label "length of a tunnel"@en .
+
+
+###  http://data.era.europa.eu/949/graph/demo#lineCategory
+:lineCategory rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#ListProperty> ;
+              rdfs:domain :Track ;
+              rdfs:range :Text ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/lineCategory>" ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-datasources#datasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#list_skospreflabel_alpha> ;
+              rdfs:label "line category"@en .
+
+
+###  http://data.era.europa.eu/949/graph/demo#opEnd
+:opEnd rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
+       rdfs:domain :SectionOfLine ;
+       rdfs:range :OperationalPoint ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://dbpedia.org/ontology/opStart>" ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "OP at the end of a SoL"@en ;
+       rdfs:label "OP End"@en .
+
+
+###  http://data.era.europa.eu/949/graph/demo#opEndOfSoL
+:opEndOfSoL rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
+            rdfs:domain :OperationalPoint ;
+            rdfs:range :SectionOfLine ;
+            <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "^<http://dbpedia.org/ontology/opEnd>" ;
+            <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "Operational Point at end of Section of Line" ;
+            rdfs:label "Operational Point at end of Section of Line"@en .
+
+
+###  http://data.era.europa.eu/949/graph/demo#opStart
+:opStart rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
+         rdfs:domain :SectionOfLine ;
+         rdfs:range :OperationalPoint ;
+         <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://dbpedia.org/ontology/opStart>" ;
+         <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "starting OP  of a Section of Line"@en ;
+         rdfs:label "OP start"@en .
+
+
+###  http://data.era.europa.eu/949/graph/demo#opStartOfSoL
+:opStartOfSoL rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
+              rdfs:domain :OperationalPoint ;
+              rdfs:range :SectionOfLine ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "^<http://dbpedia.org/ontology/opStart>" ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "Operational Point at start of Section of Line"@en ;
+              rdfs:label "Operational Point at start of Section of Line"@en .
+
+
+###  http://data.era.europa.eu/949/graph/demo#passesTunnel
+:passesTunnel rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#AutocompleteProperty> ;
+              rdfs:domain :Track ;
+              rdfs:range :Tunnel ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/passesThroughTunnel>" ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "A track passing through a tunnel"@en ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-datasources#datasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#search_rdfslabel_bifcontains> ;
+              rdfs:label "Passes through tunnel"@en .
+
+
+###  http://data.era.europa.eu/949/graph/demo#railInclination
+:railInclination rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#ListProperty> ;
+                 rdfs:domain :Track ;
+                 rdfs:range :Text ;
+                 <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/railInclination>" ;
+                 <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "rail inclination"@en ;
+                 <http://data.sparna.fr/ontologies/sparnatural-config-datasources#datasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#list_skospreflabel_alpha> ;
+                 rdfs:label "rail inclination"@en .
+
+
+###  http://data.era.europa.eu/949/graph/demo#trackDirection
+:trackDirection rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#ListProperty> ;
+                rdfs:domain :Track ;
+                rdfs:range :Text ;
+                <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/trackDirection>" ;
+                <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "Normal running direction"@en ;
+                <http://data.sparna.fr/ontologies/sparnatural-config-datasources#datasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#list_skospreflabel_alpha> ;
+                rdfs:label "track direction"@en .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#author
+:author rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#AutocompleteProperty> ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://dbpedia.org/ontology/author>" ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "l'artiste,l e peintre ou le sculpteur qui a créé l'œuvre"@fr ,
+                                                                           "the artist, painter or sculptor who created the artwork"@en ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-datasources#datasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#search_rdfslabel_bifcontains> ;
+        rdfs:label "auteur"@fr ,
+                   "author"@en .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#countryOf
+:countryOf rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#AutocompleteProperty> ;
+           rdfs:range [ rdf:type owl:Class ;
+                        owl:unionOf ( :OperationalPoint
+                                      :SectionOfLine
+                                      :Track
+                                      :Tunnel
+                                    )
+                      ] ;
+           <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "^<http://dbpedia.org/ontology/country>" ;
+           <http://data.sparna.fr/ontologies/sparnatural-config-datasources#datasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#search_rdfslabel_bifcontains> ;
+           rdfs:label "country of"@en ,
+                      "pays de"@fr .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#creationYear
+:creationYear rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#TimeProperty-Year> ;
+              rdfs:range :Date ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://dbpedia.org/ontology/creationYear>" ;
+              rdfs:label "année de création"@fr ,
+                         "creation year"@en .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#deathYear
+:deathYear rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#TimeProperty-Year> ;
+           rdfs:range :Date ;
+           <http://data.sparna.fr/ontologies/sparnatural-config-core#enableOptional> "true"^^xsd:boolean ;
+           <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://dbpedia.org/ontology/deathDate>" ;
+           rdfs:label "année de décès"@fr ,
+                      "death year"@en .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#inCountry
+:inCountry rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#TreeProperty> ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :OperationalPoint
+                                       :SectionOfLine
+                                       :Tunnel
+                                     )
+                       ] ;
+           rdfs:range :Text ;
+           <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/inCountry>" ;
+           <http://data.sparna.fr/ontologies/sparnatural-config-datasources#treeRootsDatasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#list_skospreflabel_count> ;
+           rdfs:label "dans le pays "@fr ,
+                      "in country"@en .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#inWikidata
+:inWikidata rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#NonSelectableProperty> ;
+            rdfs:range :MuseumWikidata ;
+            <http://data.sparna.fr/ontologies/sparnatural-config-core#enableOptional> "true"^^xsd:boolean ;
+            <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://www.w3.org/2002/07/owl#sameAs>" ;
+            rdfs:label "autre fiche"@fr ,
+                       "has other record"@en .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#isTrackOf
+:isTrackOf rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#AutocompleteProperty> ;
+           owl:inverseOf :track ;
+           rdfs:domain :Track ;
+           rdfs:range :OperationalPoint ;
+           <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "^<http://data.europa.eu/949/track>" ;
+           <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "The operational point of the track"@en ;
+           <http://data.sparna.fr/ontologies/sparnatural-config-datasources#datasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#search_rdfslabel_bifcontains> ;
+           rdfs:label "Is <b>track of </b>"@en .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#label
+:label rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
+       rdfs:domain [ rdf:type owl:Class ;
+                     owl:unionOf ( :OperationalPoint
+                                   :SectionOfLine
+                                   :Tunnel
+                                 )
+                   ] ;
+       rdfs:range :Text ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-core#isMultilingual> "false"^^xsd:boolean ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://www.w3.org/2000/01/rdf-schema#label>" ;
+       rdfs:label "label"@en ,
+                  "label"@fr .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#label_select-only
+:label_select-only rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#NonSelectableProperty> ;
+                   rdfs:range :Text ;
+                   <http://data.sparna.fr/ontologies/sparnatural-config-core#isMultilingual> "true"^^xsd:boolean ;
+                   <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://www.w3.org/2000/01/rdf-schema#label>" ;
+                   rdfs:label "name"@en ,
+                              "nom"@fr .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#locatedAt
+:locatedAt rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#MapProperty> ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :OperationalPoint
+                                       :SectionOfLine
+                                       :Track
+                                     )
+                       ] ;
+           rdfs:range :Map ;
+           <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://www.opengis.net/ont/geosparql#hasGeometry>/<http://www.opengis.net/ont/geosparql#asWKT>" ;
+           <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "location"@en ;
+           rdfs:label "located at"@en ,
+                      "position"@fr .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#name
+:name rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
+      rdfs:domain [ rdf:type owl:Class ;
+                    owl:unionOf ( :OperationalPoint
+                                  :SectionOfLine
+                                  :Track
+                                  :Tunnel
+                                )
+                  ] ;
+      rdfs:range :Text ;
+      <http://data.sparna.fr/ontologies/sparnatural-config-core#isMultilingual> "false"^^xsd:boolean ;
+      <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/opName>" ;
+      rdfs:label "OP name"@en ,
+                 "nom OP"@fr .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#opType
+:opType rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#TreeProperty> ;
+        rdfs:domain :OperationalPoint ;
+        rdfs:range :Text ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#enableNegation> "true"^^xsd:boolean ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#enableOptional> "true"^^xsd:boolean ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/opType>" ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-datasources#treeRootsDatasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#list_skospreflabel_alpha_with_count> ;
+        rdfs:label "OP type"@en ,
+                   "Type OP"@fr .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#track
+:track rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#AutocompleteProperty> ;
+       rdfs:domain :OperationalPoint ;
+       rdfs:range :Track ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/track>" ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "A track associated to an Operational Point or Section of Line"@en ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-datasources#datasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#search_rdfslabel_bifcontains> ;
+       rdfs:label "track"@en ,
+                  "voie"@fr .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#validityEndDate
+:validityEndDate rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#TimeProperty-Year> ;
+                 rdfs:domain :OperationalPoint ;
+                 rdfs:range :Date ;
+                 <http://data.sparna.fr/ontologies/sparnatural-config-core#enableOptional> "true"^^xsd:boolean ;
+                 <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/validityEndDate>" ;
+                 <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "validity end date"@en ;
+                 rdfs:label "validity end date"@en .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#validityStart
+:validityStart rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#TimeProperty-Year> ;
+               rdfs:domain :OperationalPoint ;
+               rdfs:range :Date ;
+               <http://data.sparna.fr/ontologies/sparnatural-config-core#enableOptional> "true"^^xsd:boolean ;
+               <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/validityStartDate>" ;
+               rdfs:label "validity start date"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Date
+:Date rdf:type owl:Class ;
+      rdfs:subClassOf rdfs:Literal ;
+      <http://data.sparna.fr/ontologies/sparnatural-config-core#faIcon> "fa-solid fa-calendar-alt" ;
+      <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "A date or a year"@en ,
+                                                                         "Une date ou une année"@fr ;
+      rdfs:label "Date"@en ,
+                 "Date"@fr .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#InfrastructureManager
+:InfrastructureManager rdf:type owl:Class ;
+                       rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SparnaturalClass> ;
+                       <http://data.sparna.fr/ontologies/sparnatural-config-core#defaultLabelProperty> :label ;
+                       <http://data.sparna.fr/ontologies/sparnatural-config-core#faIcon> "fa-solid fa-male" ;
+                       <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://dbpedia.org/ontology/InfrastructureManager>" ;
+                       <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "An infrastructure manager"@en ,
+                                                                                          "Un <b>gestionnaire d'infrastructure </b> ferrovière"@fr ;
+                       rdfs:label "Gestionnaire d'infrastructure"@fr ,
+                                  "Infrastructure Manager"@en .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Map
+:Map rdf:type owl:Class ;
+     rdfs:subClassOf rdfs:Literal ;
+     <http://data.sparna.fr/ontologies/sparnatural-config-core#faIcon> "fa-solid fa-map" ;
+     <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "Position on a map, expressed as WKT datatype, queried in GeoSPARQL"@en ,
+                                                                        "Position sur une carte, exprimée en WKT, requếtée avec GeoSPARQL"@fr ;
+     rdfs:label "Position"@en ,
+                "Position"@fr .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#MuseumWikidata
+:MuseumWikidata rdf:type owl:Class ;
+                rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#NotInstantiatedClass> ;
+                <http://data.sparna.fr/ontologies/sparnatural-config-core#faIcon> "fa-solid fa-university" ;
+                <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "La fiche du musée dans Wikidata"@fr ,
+                                                                                   "The record of the Museum in Wikidata."@en ;
+                rdfs:label "Musée Wikidata"@fr ,
+                           "Wikidata Museum"@en .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#OperationalPoint
+:OperationalPoint rdf:type owl:Class ;
+                  rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SparnaturalClass> ;
+                  <http://data.sparna.fr/ontologies/sparnatural-config-core#defaultLabelProperty> :label ;
+                  <http://data.sparna.fr/ontologies/sparnatural-config-core#faIcon> "fa-solid fa-university" ;
+                  <http://data.sparna.fr/ontologies/sparnatural-config-core#order> 1 ;
+                  <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/OperationalPoint>" ;
+                  <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "An <b>Operational Point</b>"@en ,
+                                                                                     "Un <b>point opérationnel</b>"@fr ;
+                  rdfs:label "Operational Point"@en ,
+                             "Point Opérationnel"@fr .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#SectionOfLine
+:SectionOfLine rdf:type owl:Class ;
+               rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SparnaturalClass> ;
+               <http://data.sparna.fr/ontologies/sparnatural-config-core#defaultLabelProperty> :label ;
+               <http://data.sparna.fr/ontologies/sparnatural-config-core#faIcon> "fa-solid fa-university" ;
+               <http://data.sparna.fr/ontologies/sparnatural-config-core#order> 0 ;
+               <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/SectionOfLine>" ;
+               <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "A <b>Section of Line</b>"@en ,
+                                                                                  "Une <b>section de ligne</b>"@fr ;
+               rdfs:label "Section de ligne"@fr ,
+                          "Section of line"@en .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Text
+:Text rdf:type owl:Class ;
+      rdfs:subClassOf rdfs:Literal ;
+      <http://data.sparna.fr/ontologies/sparnatural-config-core#faIcon> "fa-solid fa-font" ;
+      <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "An attribute, a property that describes the object, like a name or a description. <br/><br/>Use this to select the name of the object."@en ,
+                                                                         "Un attribut qui caractérise l'objet, comme un nom ou une description. <br/><br/>Choisissez ceci pour sélectionner le nom de l'objet"@fr ;
+      rdfs:label "Text"@en ,
+                 "Texte"@fr .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Track
+:Track rdf:type owl:Class ;
+       rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SparnaturalClass> ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-core#defaultLabelProperty> :label ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-core#faIcon> "fa-solid fa-university" ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-core#order> 2 ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/Track>" ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "A <b>Track</b>"@en ,
+                                                                          "Une <b>Voie</b>"@fr ;
+       rdfs:label "Track"@en ,
+                  "Voie"@fr .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Tunnel
+:Tunnel rdf:type owl:Class ;
+        rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SparnaturalClass> ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#defaultLabelProperty> :label ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#faIcon> "fa-solid fa-university" ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/Tunnel>" ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "A <b>Tunnel</b>"@en ,
+                                                                           "Un <b>Tunnel</b>"@fr ;
+        rdfs:label "Tunnel"@en ,
+                   "Tunnel"@fr .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+<http://xmlns.com/foaf/0.1/Person> rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://publications.europa.eu
+<http://publications.europa.eu> rdf:type owl:NamedIndividual ,
+                                         <http://www.w3.org/ns/sparql-service-description#Service> ;
+                                <http://www.w3.org/ns/sparql-service-description#endpoint> <http://publications.europa.eu/webapi/rdf/sparql> .
+
+
+###  http://ontologies.sparna.fr/sparnatural-demo-dbpedia#tree_root_countries
+:tree_root_countries rdf:type owl:NamedIndividual ,
+                              <http://data.sparna.fr/ontologies/sparnatural-config-datasources#SparqlTreeRootDatasource> ;
+                     <http://data.sparna.fr/ontologies/sparnatural-config-datasources#queryString> """PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?uri ?label ?hasChildren
+WHERE {
+  VALUES ?uri {<http://publications.europa.eu/resource/authority/country/AUT> <http://publications.europa.eu/resource/authority/country/FRA> <http://publications.europa.eu/resource/authority/country/ESP> <http://publications.europa.eu/resource/authority/country/ITA> <http://publications.europa.eu/resource/authority/country/CHE> <http://publications.europa.eu/resource/authority/country/DEU>}
+  ?uri skos:prefLabel ?label .
+  FILTER(lang(?label) = '' || lang(?label) = $lang)
+  BIND(true AS ?hasChildren)
+}""" .
+
+
+###  http://publications.europa.eu/webapi/rdf/sparql
+<http://publications.europa.eu/webapi/rdf/sparql> rdf:type owl:NamedIndividual ,
+                                                           <http://www.w3.org/ns/sparql-service-description#Service> ;
+                                                  <http://www.w3.org/ns/sparql-service-description#endpoint> <http://publications.europa.eu/webapi/rdf/sparql> .
+
+
+###  https://www.wikidata.org
+<https://www.wikidata.org> rdf:type owl:NamedIndividual ,
+                                    <http://www.w3.org/ns/sparql-service-description#Service> ;
+                           <http://www.w3.org/ns/sparql-service-description#endpoint> <https://query.wikidata.org/> .
+
+
+###  https://query.wikidata.org/
+<https://query.wikidata.org/> rdf:type owl:NamedIndividual .
+
+
+[ rdf:type <http://www.w3.org/ns/sparql-service-description#Service>
+] .
+
+###  Generated by the OWL API (version 4.5.24.2023-01-14T21:28:32Z) https://github.com/owlcs/owlapi
