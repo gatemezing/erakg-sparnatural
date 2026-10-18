@@ -32,3 +32,4 @@ file also disables Jekyll processing when Pages uses legacy branch publishing.
 - The navigation links point at the current `rinf.data.era.europa.eu` site.
 - The page listens to Sparnatural's `init` and `queryUpdated` events so it can reflect the live endpoint and show the generated JSON query structure.
 - A second Sparnatural instance loads its configuration from the RINF SHACL named graph (`http://data.europa.eu/949/graph/rinf/shacl`) and displays the generated SPARQL query.
+- The sample queries demonstrate section-of-line track relationships, TSI compliance, and a missing line-category check from ERA Data Stories. They are record-level query-builder examples, not reproductions of the stories' aggregate counts.
