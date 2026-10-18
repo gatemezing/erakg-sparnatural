@@ -29,6 +29,6 @@ file also disables Jekyll processing when Pages uses legacy branch publishing.
 ## Notes
 
 - The demo uses the GraphDB-backed ERA data repository.
-- The navigation links and example resource links point at the current `graph.data.era.europa.eu` site.
+- The navigation links point at the current `rinf.data.era.europa.eu` site.
 - The page listens to Sparnatural's `init` and `queryUpdated` events so it can reflect the live endpoint and show the generated JSON query structure.
 - A second Sparnatural instance loads its configuration from the RINF SHACL named graph (`http://data.europa.eu/949/graph/rinf/shacl`) and displays the generated SPARQL query.
