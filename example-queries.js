@@ -1,175 +1,71 @@
-var example_1 = {
-  "distinct": true,
-  "variables": [
-      "OperationalPoint_1"
-  ],
-  "order": null,
-  "branches": [
-      {
-          "line": {
-              "s": "?OperationalPoint_1",
-              "p": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#opType",
-              "o": "?Text_2",
-              "sType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#OperationalPoint",
-              "oType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Text",
-              "values": [
-                  {
-                      "label": "freight terminal (740)",
-                      "uri": "http://data.europa.eu/949/concepts/op-types/rinf/40"
-                  }
-              ]
-          },
-          "children": []
-      },
-      {
-          "line": {
-              "s": "?OperationalPoint_1",
-              "p": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#inCountry",
-              "o": "?Text_4",
-              "sType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#OperationalPoint",
-              "oType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Text",
-              "values": [
-                  {
-                      "label": "France (11036)",
-                      "uri": "http://publications.europa.eu/resource/authority/country/FRA"
-                  }
-              ]
-          },
-          "children": []
-      }
-  ]
+var config = "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#";
+
+function makeLine(subject, predicate, object, subjectType, objectType, values) {
+  return {
+    s: "?" + subject,
+    p: config + predicate,
+    o: "?" + object,
+    sType: config + subjectType,
+    oType: config + objectType,
+    values: values || []
+  };
 }
 
-var example_2 = {
-  "distinct": true,
-  "variables": [
-      "OperationalPoint_1"
-  ],
-  "order": null,
-  "branches": [
-      {
-          "line": {
-              "s": "?OperationalPoint_1",
-              "p": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#track",
-              "o": "?Track_2",
-              "sType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#OperationalPoint",
-              "oType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Track",
-              "values": []
-          },
-          "children": [
-              {
-                  "line": {
-                      "s": "?Track_2",
-                      "p": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#passesTunnel",
-                      "o": "?Tunnel_4",
-                      "sType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Track",
-                      "oType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Tunnel",
-                      "values": []
-                  },
-                  "children": [
-                      {
-                          "line": {
-                              "s": "?Tunnel_4",
-                              "p": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#hasEmergencyPlan",
-                              "o": "?Text_6",
-                              "sType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Tunnel",
-                              "oType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Text",
-                              "values": [
-                                  {
-                                      "label": "False",
-                                      "boolean": false
-                                  }
-                              ]
-                          },
-                          "children": []
-                      }
-                  ]
-              }
-          ]
-      }
-  ]
+function makeBranch(line, children, notExists) {
+  var branch = {
+    line: line,
+    children: children || []
+  };
+  if (notExists) {
+    branch.notExists = true;
+  }
+  return branch;
 }
 
-var example_3 = {
-  "distinct": true,
-  "variables": [
-      "Track_1"
-  ],
-  "order": null,
-  "branches": [
-      {
-          "line": {
-              "s": "?Track_1",
-              "p": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#isTrackOf",
-              "o": "?OperationalPoint_2",
-              "sType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Track",
-              "oType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#OperationalPoint",
-              "values": [
-                  {
-                      "label": "Paris-Est",
-                      "rdfTerm": {
-                          "type": "uri",
-                          "value": "http://data.europa.eu/949/functionalInfrastructure/operationalPoints/FR0000016314"
-                      }
-                  }
-              ]
-          },
-          "children": []
-      }
-  ]
+function makeQuery(variable, branches) {
+  return {
+    distinct: true,
+    variables: [variable],
+    order: null,
+    branches: branches
+  };
 }
 
-var example_4 = {
-  "distinct": true,
-  "variables": [
-      "Track_1"
-  ],
-  "order": null,
-  "branches": [
-      {
-          "line": {
-              "s": "?Track_1",
-              "p": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#isTrackOf",
-              "o": "?OperationalPoint_2",
-              "sType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Track",
-              "oType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#OperationalPoint",
-              "values": []
-          },
-          "children": [
-              {
-                  "line": {
-                      "s": "?OperationalPoint_2",
-                      "p": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#inCountry",
-                      "o": "?Text_4",
-                      "sType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#OperationalPoint",
-                      "oType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Text",
-                      "values": [
-                          {
-                              "label": "Belgium (1275)",
-                              "uri": "http://publications.europa.eu/resource/authority/country/BEL"
-                          }
-                      ]
-                  },
-                  "children": []
-              },
-              {
-                  "line": {
-                      "s": "?OperationalPoint_2",
-                      "p": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#opType",
-                      "o": "?Text_8",
-                      "sType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#OperationalPoint",
-                      "oType": "http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Text",
-                      "values": [
-                          {
-                              "label": "small station (6803)",
-                              "uri": "http://data.europa.eu/949/concepts/op-types/rinf/20"
-                          }
-                      ]
-                  },
-                  "children": []
-              }
-          ]
-      }
-  ]
-}
-  
+var example_1 = makeQuery("Track_4", [
+  makeBranch(makeLine("SectionOfLine_1", "opStart", "OperationalPoint_2", "SectionOfLine", "OperationalPoint")),
+  makeBranch(makeLine("SectionOfLine_1", "opEnd", "OperationalPoint_3", "SectionOfLine", "OperationalPoint")),
+  makeBranch(makeLine("SectionOfLine_1", "sectionTrack", "Track_4", "SectionOfLine", "Track"), [
+    makeBranch(makeLine("Track_4", "highSpeedLoadModelCompliance", "Text_5", "Track", "Text", [
+      { label: "True", boolean: true }
+    ]))
+  ])
+]);
+
+var example_2 = makeQuery("Track_2", [
+  makeBranch(makeLine("SectionOfLine_1", "sectionTrack", "Track_2", "SectionOfLine", "Track"), [
+    makeBranch(makeLine("Track_2", "hasTSITrainDetection", "Text_3", "Track", "Text", [
+      { label: "False", boolean: false }
+    ]))
+  ])
+]);
+
+var example_3 = makeQuery("Track_3", [
+  makeBranch(makeLine("SectionOfLine_1", "inCountry", "Text_2", "SectionOfLine", "Text", [
+    { label: "Belgium", uri: "http://publications.europa.eu/resource/authority/country/BEL" }
+  ])),
+  makeBranch(makeLine("SectionOfLine_1", "sectionTrack", "Track_3", "SectionOfLine", "Track"), [
+    makeBranch(makeLine("Track_3", "lineCategory", "Text_4", "Track", "Text"), [], true)
+  ])
+]);
+
+var example_4 = makeQuery("Track_3", [
+  makeBranch(makeLine("SectionOfLine_1", "inCountry", "Text_2", "SectionOfLine", "Text", [
+    { label: "Hungary", uri: "http://publications.europa.eu/resource/authority/country/HUN" }
+  ])),
+  makeBranch(makeLine("SectionOfLine_1", "sectionTrack", "Track_3", "SectionOfLine", "Track"), [
+    makeBranch(makeLine("Track_3", "lineCategory", "Text_4", "Track", "Text")),
+    makeBranch(makeLine("Track_3", "highSpeedLoadModelCompliance", "Text_5", "Track", "Text", [
+      { label: "True", boolean: true }
+    ]))
+  ])
+]);

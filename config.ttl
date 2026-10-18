@@ -44,6 +44,22 @@
                   <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "Know if a tunnel has emergency plan"@en ;
                   rdfs:label "has emergency plan"@en .
 
+###  http://data.era.europa.eu/949/graph/demo#hasTSITrainDetection
+:hasTSITrainDetection rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#BooleanProperty> ;
+                      rdfs:domain :Track ;
+                      rdfs:range :Text ;
+                      <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/hasTSITrainDetection>" ;
+                      rdfs:label "TSI train detection compliance"@en .
+
+###  http://data.era.europa.eu/949/graph/demo#highSpeedLoadModelCompliance
+:highSpeedLoadModelCompliance rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#BooleanProperty> ;
+                               rdfs:domain :Track ;
+                               rdfs:range :Text ;
+                               <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/highSpeedLoadModelCompliance>" ;
+                               rdfs:label "high-speed load model compliance"@en .
+
 
 ###  http://data.era.europa.eu/949/graph/demo#isQuietRoute
 :isQuietRoute rdf:type owl:ObjectProperty ;
@@ -71,9 +87,19 @@
               rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#ListProperty> ;
               rdfs:domain :Track ;
               rdfs:range :Text ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#enableNegation> "true"^^xsd:boolean ;
               <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/lineCategory>" ;
               <http://data.sparna.fr/ontologies/sparnatural-config-datasources#datasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#list_skospreflabel_alpha> ;
               rdfs:label "line category"@en .
+
+###  http://data.era.europa.eu/949/graph/demo#sectionTrack
+:sectionTrack rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#AutocompleteProperty> ;
+              rdfs:domain :SectionOfLine ;
+              rdfs:range :Track ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/track>" ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-datasources#datasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#search_rdfslabel_bifcontains> ;
+              rdfs:label "track on section of line"@en .
 
 
 ###  http://data.era.europa.eu/949/graph/demo#opEnd
@@ -81,7 +107,7 @@
        rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
        rdfs:domain :SectionOfLine ;
        rdfs:range :OperationalPoint ;
-       <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://dbpedia.org/ontology/opStart>" ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/opEnd>" ;
        <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "OP at the end of a SoL"@en ;
        rdfs:label "OP End"@en .
 
@@ -91,7 +117,7 @@
             rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
             rdfs:domain :OperationalPoint ;
             rdfs:range :SectionOfLine ;
-            <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "^<http://dbpedia.org/ontology/opEnd>" ;
+            <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "^<http://data.europa.eu/949/opEnd>" ;
             <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "Operational Point at end of Section of Line" ;
             rdfs:label "Operational Point at end of Section of Line"@en .
 
@@ -101,7 +127,7 @@
          rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
          rdfs:domain :SectionOfLine ;
          rdfs:range :OperationalPoint ;
-         <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://dbpedia.org/ontology/opStart>" ;
+         <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://data.europa.eu/949/opStart>" ;
          <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "starting OP  of a Section of Line"@en ;
          rdfs:label "OP start"@en .
 
@@ -111,7 +137,7 @@
               rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
               rdfs:domain :OperationalPoint ;
               rdfs:range :SectionOfLine ;
-              <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "^<http://dbpedia.org/ontology/opStart>" ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "^<http://data.europa.eu/949/opStart>" ;
               <http://data.sparna.fr/ontologies/sparnatural-config-core#tooltip> "Operational Point at start of Section of Line"@en ;
               rdfs:label "Operational Point at start of Section of Line"@en .
 
