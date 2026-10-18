@@ -18,6 +18,14 @@ python3 -m http.server 8000
 
 Then visit `http://localhost:8000`.
 
+## GitHub Pages
+
+Every push to `main` deploys the static site to
+https://gatemezing.github.io/erakg-sparnatural/ using GitHub Actions. The repository's Pages
+source must be set to **GitHub Actions** in the repository settings. The workflow stages only
+the runtime assets and uploads them directly; it does not install or run Jekyll. The `.nojekyll`
+file also disables Jekyll processing when Pages uses legacy branch publishing.
+
 ## Notes
 
 - The demo uses the GraphDB-backed ERA data repository.
